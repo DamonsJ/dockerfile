@@ -1,7 +1,7 @@
 # This is a docker file for gdal in ubuntu system
 
 # using base image from ubuntu
-FROM ubuntu:18.04
+FROM ubuntu:18.04 as baseimage
 
 MAINTAINER  Damons <shlkl99@163.com>
 
