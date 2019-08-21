@@ -1,0 +1,9 @@
+.git
+.DS_Store
+.gitignore
+README.md
+Dockerfile.terrain
+__pycache__
+log
+run.pid
+data

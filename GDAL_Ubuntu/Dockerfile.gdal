@@ -12,7 +12,11 @@ RUN cp /etc/apt/sources.list /etc/apt/sources_backup.list && \
     apt-get install vim -y && \
     apt-get install python3 -y && \
     apt-get install python3-pip -y && \
-    apt-get install -y git
+    apt-get install -y git && \
+    pip3 install --upgrade pip 
+
+#修改升级后的pip
+COPY pip3 /usr/bin/
 
 # 安装GDAL相关
 RUN apt-get install software-properties-common -y && \
@@ -22,5 +26,4 @@ RUN apt-get install software-properties-common -y && \
     apt-get install libgdal-dev -y && \
     export CPLUS_INCLUDE_PATH=/usr/include/gdal  && \
     export C_INCLUDE_PATH=/usr/include/gdal  && \
-    pip3 install GDAL==2.4
-
+    pip3 install GDAL==2.4 

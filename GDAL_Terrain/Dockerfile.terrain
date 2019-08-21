@@ -1,0 +1,28 @@
+# This is a docker file for gdal terrian anylysis
+
+# using base image from ubuntu
+FROM gdalimage:v2
+
+MAINTAINER  Damons <shlkl99@163.com>
+
+#copy requirements.txt
+COPY requirements.txt /usr/tmp/
+
+#安装程序运行的必要包
+RUN pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
+    pip3 install -r /usr/tmp/requirements.txt && \
+    mkdir /usr/GoldEarth && \
+    cd /usr/GoldEarth
+
+#拷贝文件到docker 环境
+COPY . /usr/GoldEarth
+
+#设置工作目录
+WORKDIR /usr/GoldEarth
+
+#设置访问端口
+EXPOSE 7096 
+
+#执行启动程序
+CMD ["sh", "start.sh"]
+
