@@ -1,0 +1,26 @@
+# This is a docker file for gdal in ubuntu system
+
+# using base image from ubuntu
+FROM ubuntu:18.04
+
+MAINTAINER  Damons <shlkl99@163.com>
+
+#备份源列表及更换为国内源,同时安装必要软件
+RUN cp /etc/apt/sources.list /etc/apt/sources_backup.list && \
+    sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.aliyun\.com\/ubuntu\//g' /etc/apt/sources.list &&\
+    apt-get update -y && \
+    apt-get install vim -y && \
+    apt-get install python3 -y && \
+    apt-get install python3-pip -y && \
+    apt-get install -y git
+
+# 安装GDAL相关
+RUN apt-get install software-properties-common -y && \
+    add-apt-repository ppa:ubuntugis/ppa -y && \
+    apt-get update -y && \
+    apt-get install gdal-bin -y && \
+    apt-get install libgdal-dev -y && \
+    export CPLUS_INCLUDE_PATH=/usr/include/gdal  && \
+    export C_INCLUDE_PATH=/usr/include/gdal  && \
+    pip3 install GDAL==2.4
+
